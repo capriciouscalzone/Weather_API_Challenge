@@ -31,6 +31,17 @@ $('#clear').click(function() {
 });
 
 
+function getWeatherDetails(cityName) {
+    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}';
+
+       $.ajax({
+        url: queryURL,
+        type: 'GET',
+        success: function(response){
+            
+        }
+       })
+}
 
 
 
