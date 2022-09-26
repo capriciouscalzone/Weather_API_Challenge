@@ -4,5 +4,13 @@ var city = $("#cityName")
 
 var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-fetch(queryURL)
+
+
+
+$('#submitCity').click(function() {
+    event.preventDefault();
+    let cityName = $('#cityName').val();
+})
+
+
 
