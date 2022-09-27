@@ -109,7 +109,28 @@ function returnUVIndex(coordinates) {
     })
 }
 
+function historyCities(cityName) {
+    var citySearch = cityName.trim();
+    var buttonCheck = $(`#pastCities > BUTTON[value='${citySearch}']`);
+    if (buttonCheck.length == 1) {
+        return;
+    }
 
+    if (!cityHistory.includes(cityName)){
+        cityHistory.push(cityName);
+        localStorage.setItem("localWeatherSearches", JSON.stringify(cityHistory));
+    }
+
+    $("pastCities").prepend(`
+    <button class="btn btn-light cityHistoryBtn" value='${cityName}'>${cityName}</button>
+    `);
+}
+
+function writeSearchHistory(array) {
+    $.each(array, function(i) {
+        historyCities(array[i]);
+    })
+}
 
 
 
