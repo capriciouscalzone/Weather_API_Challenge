@@ -1,0 +1,14 @@
+#pastCities {
+    border:  solid 1px black;
+    margin-bottom: 15px;
+}
+
+.blockUV {
+    padding: 5px;
+
+}
+
+#currentWeather {
+    border: solid 1px black;
+    padding: 15px;
+}
