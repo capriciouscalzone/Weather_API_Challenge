@@ -32,7 +32,7 @@ $('#clear').click(function() {
 
 
 function getWeatherDetails(cityName) {
-    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}';
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}`;
 
        $.ajax({
         url: queryURL,
@@ -56,6 +56,21 @@ function getWeatherDetails(cityName) {
             
         }
        })
+};
+
+function getFutureWeather(cityName) {
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}`
+
+    $.get(queryURL).then(function(response){
+        let forecastInfo = response.list;
+        fiveDayForecast.empty();
+        $.each(forecastInfo, function(i) {
+            if (!forcastInfo[i].dt_txt.includes("12:00:00")) {
+                return;
+            }
+        })
+    })
+
 }
 
 
