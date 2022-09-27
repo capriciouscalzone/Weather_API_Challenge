@@ -41,8 +41,18 @@ function getWeatherDetails(cityName) {
 
             let currTime = new Date(response.dt*1000);
             let weatherIcon = 'https//openweathermap.org/img/wn/${response.weather[0].icon}@2x.png';
-            currWeather.html('
-            <h2> ${response.name}, ${respnse.sys.country} (${currTime.getMonth()+1}/$currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px"></h2>')
+            currWeather.html( `<h2> ${response.name} , ${respnse.sys.country} (${currTime.getMonth()+1}/$currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px" </h2>
+            <p>Temperature: ${response.main.temp}F</p>
+            <p>Humidity: ${response.main.humidity}%</p>
+            <p>Wind Speed: ${response.wind.speed} mph</p>
+            `, returnUVIndex(response.coord))
+            historyCities(response.name);
+        },
+        error: function(){
+            console.clear()
+            alert('Enter real city');
+            console.clear();
+            
             
         }
        })
