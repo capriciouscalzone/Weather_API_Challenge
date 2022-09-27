@@ -41,7 +41,7 @@ function getWeatherDetails(cityName) {
 
             let currTime = new Date(response.dt*1000);
             let weatherIcon = 'https//openweathermap.org/img/wn/${response.weather[0].icon}@2x.png';
-            currWeather.html( `<h2> ${response.name} , ${respnse.sys.country} (${currTime.getMonth()+1}/$currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px" </h2>
+            currWeather.html( `<h2> ${response.name} , ${response.sys.country} (${currTime.getMonth()+1}/$currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px" </h2>
             <p>Temperature: ${response.main.temp}F</p>
             <p>Humidity: ${response.main.humidity}%</p>
             <p>Wind Speed: ${response.wind.speed} mph</p>
@@ -86,6 +86,30 @@ function getFutureWeather(cityName) {
     })
 
 };
+
+function returnUVIndex(coordinates) {
+    var queryURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${coordinates.lat}&lon=${coordinates.lon}&APPID=${apikey}`;
+
+    $.get(queryURL).then(function(response) {
+        var UV = response.value;
+        var UVcolor = "green";
+
+        if(UV >= 11){
+            UVcolor = "violet";
+        } else if (UV >= 8){
+            UVcolor = "red";
+        
+        } else if (UV >= 6){
+            UVcolor = "orange";
+        } else if (UV >= 3){
+            UVcolor = "yellow";
+        }
+        currWeather.append(`<p>UV Index: <span class="blockUV" style="background-color: ${UVcolor}">${UV}</span></p>`);
+
+    })
+}
+
+
 
 
 
