@@ -1,8 +1,7 @@
-var APIKey = "a7702cd16c3900bfd85bce8efc609fda";
-
+var apiKey = "a7702cd16c3900bfd85bce8efc609fda";
+var cityHistory;
 var city = $("#cityName")
-
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+var fiveDayForecast = $("#currentWeather")
 
 
 
