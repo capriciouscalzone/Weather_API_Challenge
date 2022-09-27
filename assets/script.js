@@ -1,7 +1,7 @@
-var apiKey = "a7702cd16c3900bfd85bce8efc609fda";
+const apiKey = "a7702cd16c3900bfd85bce8efc609fda";
 var cityHistory;
-var city = $("#cityName")
-var fiveDayForecast = $("#currentWeather")
+var fiveDayForecast = $("#weatherForecast");
+var currWeather = $("#currentWeather");
 
 
 
@@ -26,12 +26,12 @@ if (localStorage.getItem('localWeatherSearches')) {
     cityHistory = [];
 };
 $('#clear').click(function() {
-    localStorage.clear('localWeatherSEarches');
+    localStorage.clear('localWeatherSearches');
 });
 
 
 function getWeatherDetails(cityName) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}`;
+    let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}`;
 
        $.ajax({
         url: queryURL,
@@ -39,8 +39,8 @@ function getWeatherDetails(cityName) {
         success: function(response){ 
 
             let currTime = new Date(response.dt*1000);
-            let weatherIcon = 'https//openweathermap.org/img/wn/${response.weather[0].icon}@2x.png';
-            currWeather.html( `<h2> ${response.name} , ${response.sys.country} (${currTime.getMonth()+1}/$currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px" </h2>
+            let weatherIcon = `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`;
+            currWeather.html( `<h2> ${response.name} , ${response.sys.country} (${currTime.getMonth()+1}/${currTime.getDate()}/${currTime.getFullYear()})<img src=${weatherIcon} height="70px"></h2>
             <p>Temperature: ${response.main.temp}F</p>
             <p>Humidity: ${response.main.humidity}%</p>
             <p>Wind Speed: ${response.wind.speed} mph</p>
@@ -58,22 +58,22 @@ function getWeatherDetails(cityName) {
 };
 
 function getFutureWeather(cityName) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apikey}`
+    let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}`
 
     $.get(queryURL).then(function(response){
         let forecastInfo = response.list;
         fiveDayForecast.empty();
         $.each(forecastInfo, function(i) {
-            if (!forcastInfo[i].dt_txt.includes("12:00:00")) {
+            if (!forecastInfo[i].dt_txt.includes("12:00:00")) {
                 return;
             }
-            let forecastDate = new Date(forcastInfo[i].dt*1000);
+            let forecastDate = new Date(forecastInfo[i].dt*1000);
             let weatherIcon =  `https://openweathermap.org/img/wn/${forecastInfo[i].weather[0].icon}.png`;
             fiveDayForecast.append(`
             <div class="col-md">
                 <div class="card text-white bg-primary">
                     <div class="card-body">
-                        <h4>${forecastDate.getMonth()+1}/${forcastDate.getDate()}/${forcastDate.getFullYear()}</h4>
+                        <h4>${forecastDate.getMonth()+1}/${forecastDate.getDate()}/${forecastDate.getFullYear()}</h4>
                         <img src=${weatherIcon} alt="Icon">
                         <p>Temp: ${forecastInfo[i].main.temp}F</p>
                         <p>Humidty: ${forecastInfo[i].main.humidity}%</p>
@@ -87,7 +87,7 @@ function getFutureWeather(cityName) {
 };
 
 function returnUVIndex(coordinates) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${coordinates.lat}&lon=${coordinates.lon}&APPID=${apikey}`;
+    var queryURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${coordinates.lat}&lon=${coordinates.lon}&APPID=${apiKey}`;
 
     $.get(queryURL).then(function(response) {
         var UV = response.value;

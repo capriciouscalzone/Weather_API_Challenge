@@ -1,3 +1,8 @@
+body {
+    background-color: teal;
+}
+
+
 #pastCities {
     border:  solid 1px black;
     margin-bottom: 15px;
@@ -11,4 +16,28 @@
 #currentWeather {
     border: solid 1px black;
     padding: 15px;
+    border-radius: 5px;
+}
+
+.container {
+    max-width: 1300px;
+}
+
+.card-body {
+    padding: 5px;
+    padding-bottom: 0;
+}
+
+.btn-light {
+    text-align: left;
+
+}
+
+.btn-group-vertical {
+    width: 100%;
+    display: inline-block;
+}
+
+.bg-primary, .input-group {
+    margin-bottom: 10px;
 }
