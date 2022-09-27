@@ -68,10 +68,24 @@ function getFutureWeather(cityName) {
             if (!forcastInfo[i].dt_txt.includes("12:00:00")) {
                 return;
             }
+            let forecastDate = new Date(forcastInfo[i].dt*1000);
+            let weatherIcon =  `https://openweathermap.org/img/wn/${forecastInfo[i].weather[0].icon}.png`;
+            fiveDayForecast.append(`
+            <div class="col-md">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h4>${forecastDate.getMonth()+1}/${forcastDate.getDate()}/${forcastDate.getFullYear()}</h4>
+                        <img src=${weatherIcon} alt="Icon">
+                        <p>Temp: ${forecastInfo[i].main.temp}F</p>
+                        <p>Humidty: ${forecastInfo[i].main.humidity}%</p>
+                    </div>
+                </div>
+            </div>
+            `)
         })
     })
 
-}
+};
 
 
 
